@@ -7,3 +7,5 @@ build/
 incfiles.mk
 __pycache__/
 *:Zone.Identifier
+*.egg-info/
+.coverage

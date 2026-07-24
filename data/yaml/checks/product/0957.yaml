@@ -1,4 +1,5 @@
 id: '0957'
+sortKey: 604500
 severity: major
 target: product
 platform:
@@ -8,23 +9,29 @@ check:
     チェックボックスは、キーボードで操作できるようになっている。
   en: |-
     Check boxes can be operated using the keyboard.
-procedures:
+conditions:
 - platform: web
-  procedure:
-    ja: |-
-      以下のキーボードによるチェックを満たしていることを確認する。
-    en: |-
-      Confirm the following check by keyboard passes.
-  techniques:
-  - tool: keyboard
-    technique:
+  type: or
+  conditions:
+  - type: simple
+    tool: misc
+    id: 0957-content-00
+    procedure:
       ja: |-
-        以下のすべてを満たしていることを確認する:
+        チェック対象の画面にチェックボックスが存在しない。
+      en: |-
+        There are no check boxes on the screen to be checked.
+  - type: simple
+    tool: keyboard
+    id: "0957-keyboard-01"
+    procedure:
+      ja: |-
+        キーボード操作時、以下のすべてを満たしている:
 
-        *  Tab/Shift+Tabキーでフォーカスを移動した際、到達できないチェックボックスがない。
+        *  :kbd:`Tab` / :kbd:`Shift+Tab` キーでフォーカスを移動した際、到達できないチェックボックスがない。
         *  スペースキーを押下することで、フォーカスされているチェックボックスのオン/オフ譜を切り替えられる。
       en: |-
-        Confirm that all of the following are satisfied:
+        All of the following are met when performing keyboard operations:
 
-        *  There are no check boxes that cannot be reached when moving the focus using the Tab/Shift+Tab keys.
+        *  There are no check boxes that cannot be reached when moving the focus using the :kbd:`Tab` / :kbd:`Shift+Tab` keys.
         *  The on/off state of the focused check box can be toggled by pressing the space key.

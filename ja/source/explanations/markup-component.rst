@@ -29,7 +29,7 @@ HTMLの要素においては、要素ごとにデフォルトが決まってい�
 
 参考： 要素ごとのAccessibleNameとroleの付与については、 `HTML
 Accessibility API Mappings
-1.0 <https://www.w3.org/TR/html-aam-1.0/>`_ で定義されています。
+1.0 <https://www.w3.org/TR/html-aam-1.0/>`__ で定義されています。
 
 Reactコンポーネントのように、最終的にHTMLとしてブラウザーが処理するものを生成するコンポーネントの場合は、そのHTMLが適切なセマンティクスを示す要素で構成されているようにしたり、必要に応じて ``aria-label`` 属性や ``role`` 属性を用いて適切な値が含まれるHTMLにすることで、AccessibleNameとroleを提供することができます。
 
@@ -44,3 +44,5 @@ WCAG 2.1の解説書では、フォーカスの状態の取得と制御、チェ
 上述の通り、まずは開発者ツールで最低限の確認が可能ですが、実際にはスクリーン・リーダーなどの支援技術のユーザーが正しく利用できる状態を確保することが目的ですので、最終的には支援技術で使い勝手を確認するのが望ましいでしょう。
 
 .. include:: /inc/info2gl/exp-markup-component.rst
+
+.. include:: /inc/info2faq/exp-markup-component.rst

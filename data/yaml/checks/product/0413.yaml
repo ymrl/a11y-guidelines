@@ -1,4 +1,5 @@
 id: '0413'
+sortKey: 502300
 severity: normal
 target: product
 platform:
@@ -6,59 +7,67 @@ platform:
 - mobile
 check:
   ja: |-
-    アイコンがテキストのラベルと併せて表示されている場合、同じ内容が重複してスクリーン・リーダーに読み上げられない。
+    アイコンがテキストのラベルと併せて表示されている箇所をスクリーン・リーダーで読み上げさせた際、同じ内容が重複して読み上げられない。
   en: |-
-    When icons are displayed along with text labels, the same content is not announced by the screen reader more than once.
-procedures:
+    When an icon is displayed together with a text label, the same content is not announced twice by the screen reader.
+conditions:
 - platform: web
+  type: or
+  conditions:
+  - type: simple
+    tool: misc
+    id: "0413-content-00"
+    procedure:
+      ja: |-
+        チェック対象の画面にアイコンが存在しない。
+      en: |-
+        There are no icons on the screen to be checked.
+  - type: or
+    conditions:
+    - type: simple
+      tool: nvda
+      id: "0413-nvda-01"
+      procedure:
+        ja: |-
+          NVDAのブラウズ・モードでの矢印キーの操作で、当該のアイコンとテキスト・ラベルがある箇所を通過したとき、アイコンとそのアイコンに併記されているテキストの両方が読み上げられるなど、結果として同じ内容が2度読まれるような状態になっていない。
+        en: |-
+          The same content is not announced twice as the result of both the icon and the accompanying text being announced, when passing over a location with an icon accompanied by a text label using arrow keys in NVDA's browse mode.
+      YouTube:
+        id: _Q1WaOtcX7c
+        title: アイコンの説明が重複しない【NVDAでアクセシビリティー チェック】
+    - type: simple
+      tool: macos-vo
+      id: "0413-macvo-01"
+      procedure:
+        ja: |-
+          macOS VoiceOverの :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で、当該のアイコンとテキスト・ラベルがある箇所を通過したとき、アイコンとそのアイコンに併記されているテキストの両方が読み上げられるなど、結果として同じ内容が2度読まれるような状態になっていない。
+        en: |-
+          The same content is not announced twice as the result of both the icon and the accompanying text being announced, when passing over a location with an icon accompanied by a text label using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor with macOS VoiceOver enabled.
+- platform: ios
+  type: simple
+  tool: ios-vo
+  id: "0413-iosvo-01"
   procedure:
     ja: |-
-      以下のNVDAによるチェックまたはmacOS VoiceOverによるチェックのいずれかを満たしていることを確認する。
+      iOS VoiceOver有効時に1本指による右および左方向のフリックでフォーカスを移動して当該のアイコンとテキスト・ラベルがある箇所を通過したとき、アイコンとそのアイコンに併記されているテキストの両方が読み上げられるなど、結果として同じ内容が2度読まれるような状態になっていないことを確認する。
     en: |-
-      Confirm that either the check by NVDA or the check by macOS VoiceOver below passes.
-  techniques:
-  - tool: nvda
-    technique:
-      ja: |-
-        ブラウズ・モードでの矢印キーの操作で、当該のアイコンとテキスト・ラベルがある箇所を通過したとき、アイコンとそのアイコンに併記されているテキストの両方が読み上げられるなど、結果として同じ内容が2度読まれるような状態になっていないことを確認する。
-      en: |-
-        Confirm that the same content is not announced twice as the result of both the icon and the accompanying text being announced, when passing over a location with an icon accompanied by a text label using arrow keys in browse mode.
-    YouTube:
-      id: _Q1WaOtcX7c
-      title: アイコンの説明が重複しない【NVDAでアクセシビリティー チェック】
-  - tool: macos-vo
-    technique:
-      ja: |-
-        :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で当該のアイコンとテキスト・ラベルがある箇所を通過したとき、アイコンとそのアイコンに併記されているテキストの両方が読み上げられるなど、結果として同じ内容が2度読まれるような状態になっていないことを確認する。
-      en: |-
-        Confirm that the same content is not announced twice as the result of both the icon and the accompanying text being announced, when passing over a location with an icon accompanied by a text label using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor.
-- platform: mobile
+      Confirm that the same content is not announced twice as the result of both the icon and the accompanying text being announced, when passing over a location with an icon accompanied by a text label using one-finger left/right flicks with iOS VoiceOver enabled.
+  note:
+    ja: |-
+      参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+    en: |-
+      CF: :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+- platform: android
+  type: simple
+  tool: android-tb
+  id: "0413-androidtb-01"
   procedure:
     ja: |-
-      以下のiOS VoiceOverおよびAndroid TalkBackによるチェックを満たしていることを確認する。
+      Android TalkBack有効時に1本指による右および左方向のフリックでフォーカスを移動して当該のアイコンとテキスト・ラベルがある箇所を通過したとき、アイコンとそのアイコンに併記されているテキストの両方が読み上げられるなど、結果として同じ内容が2度読まれるような状態になっていないことを確認する。
     en: |-
-      Confirm that the following checks by iOS VoiceOver and Android TalkBack pass.
-  techniques:
-  - tool: ios-vo
-    technique:
-      ja: |-
-        1本指による右および左方向のフリックでフォーカスを移動して当該のアイコンとテキスト・ラベルがある箇所を通過したとき、アイコンとそのアイコンに併記されているテキストの両方が読み上げられるなど、結果として同じ内容が2度読まれるような状態になっていないことを確認する。
-      en: |-
-        Confirm that the same content is not announced twice as the result of both the icon and the accompanying text being announced, when passing over a location with an icon accompanied by a text label using one-finger left/right flicks.
-    note:
-      ja: |-
-        参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
-      en: |-
-        CF: :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
-  - tool: android-tb
-    technique:
-      ja: |-
-        1本指による右および左方向のフリックでフォーカスを移動して当該のアイコンとテキスト・ラベルがある箇所を通過したとき、アイコンとそのアイコンに併記されているテキストの両方が読み上げられるなど、結果として同じ内容が2度読まれるような状態になっていないことを確認する。
-      en: |-
-        Confirm that the same content is not announced twice as the result of both the icon and the accompanying text being announced, when passing over a location with an icon accompanied by a text label using one-finger left/right flicks.
-    note:
-      ja: |-
-        参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
-      en: |-
-        CF: :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
-
+      Confirm that the same content is not announced twice as the result of both the icon and the accompanying text being announced, when passing over a location with an icon accompanied by a text label using one-finger left/right flicks with Android TalkBack enabled.
+  note:
+    ja: |-
+      参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+    en: |-
+      CF: :ref:`exp-sr-androidtb-one-finger-horizontal-flick`

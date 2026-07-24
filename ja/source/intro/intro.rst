@@ -186,12 +186,12 @@ HTML版
 GitHubリリース・ページ
    https://github.com/freee/a11y-guidelines/releases/latest
 
-この文書の改善のための提案は、 `GitHub <https://github.com/freee/a11y-guidelines/>`_ 上でお知らせください。
+この文書の改善のための提案は、 `GitHub <https://github.com/freee/a11y-guidelines/>`__ 上でお知らせください。
 
 著作権と利用許諾条件
 ====================
 
-|cclogo| 「freeeアクセシビリティー・ガイドライン」は、フリー株式会社が作成したもので、 `クリエイティブ・コモンズ 表示 4.0 国際 ライセンス <https://creativecommons.org/licenses/by/4.0/>`_ で提供されています。
+|cclogo| 「freeeアクセシビリティー・ガイドライン」は、フリー株式会社が作成したもので、 `クリエイティブ・コモンズ 表示 4.0 国際 ライセンス <https://creativecommons.org/licenses/by/4.0/>`__ で提供されています。
 
 Copyright © |copyright|
 
@@ -212,6 +212,6 @@ Copyright © |copyright|
 .. _WCAG21ja: https://waic.jp/translations/WCAG21/
 
 .. |cclogo| image:: https://i.creativecommons.org/l/by/4.0/88x31.png
-   :alt: クリエイティブ・コモンズ・ライセンス
+   :alt: クリエイティブ・コモンズ 表示 国際 4.0 (CC BY 4.0) ライセンス
 
 .. translated:: true

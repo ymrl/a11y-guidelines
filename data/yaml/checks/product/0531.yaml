@@ -1,4 +1,5 @@
 id: '0531'
+sortKey: 602600
 severity: major
 target: product
 platform:
@@ -9,59 +10,86 @@ check:
     画像化されているテキストの内容を、スクリーン・リーダーで確認できる。
   en: |-
     The screen reader announces the same content as the images of text.
-procedures:
+conditions:
 - platform: web
+  type: or
+  conditions:
+  - type: simple
+    tool: misc
+    id: 0531-content-00
+    procedure:
+      ja: |-
+        チェック対象の画面には、画像化されたテキストはまったく存在しない。
+      en: |-
+        There are no images of text at all on the screen to be checked.
+  - type: and
+    conditions:
+    - type: simple
+      tool: misc
+      id: 0531-content-01
+      procedure:
+        ja: |-
+          チェック対象の画面には、自社および他社のロゴ、バナー、図や写真の中の文字列を除いて、画像化されたテキストが存在しない。
+        en: |-
+          The screen to be checked does not contain any images of text, except for company and third-party logos, banners, and text within diagrams or photographs.
+    - type: or
+      conditions:
+      - type: simple
+        tool: nvda
+        id: "0531-nvda-01"
+        procedure:
+          ja: |-
+            NVDAのブラウズ・モードでの矢印キーの操作で当該の画像を読み上げさせたとき、画像に含まれるテキストと同じ内容が読み上げられる。
+          en: |-
+            The same text as contained in the image is announced when using arrow keys in NVDA's browse mode.
+        YouTube:
+          id: 7vGc7p0FraE
+          title: 画像化されたテキスト【NVDAでアクセシビリティー チェック】
+      - type: simple
+        tool: macos-vo
+        id: "0531-macvo-01"
+        procedure:
+          ja: |-
+            macOS VoiceOverの :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で当該の画像を読み上げさせたとき、画像に含まれるテキストと同じ内容が読み上げられる。
+          en: |-
+            The same text as contained in the image is announced when using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor with macOS VoiceOver enabled.
+- platform: ios
+  type: simple
+  tool: ios-vo
+  id: "0531-iosvo-01"
   procedure:
     ja: |-
-      以下のNVDAによるチェックまたはmacOS VoiceOverによるチェックのいずれかを満たしていることを確認する。
+      iOS VoiceOverが有効な状態で、以下を確認する：
+
+      *  1本指による右および左方向のフリックで画像に到達した際、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
+      *  （フリックではなく）画像に触れたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
     en: |-
-      Confirm that either the check by NVDA or the check by macOS VoiceOver below passes.
-  techniques:
-  - tool: nvda
-    technique:
-      ja: |-
-        ブラウズ・モードでの矢印キーの操作で当該の画像を読み上げさせたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
-      en: |-
-        Confirm that the same text as contained in the image is announced when using arrow keys in browse mode.
-    YouTube:
-      id: 7vGc7p0FraE
-      title: 画像化されたテキスト【NVDAでアクセシビリティー チェック】
-  - tool: macos-vo
-    technique:
-      ja: |-
-        :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で当該の画像を読み上げさせたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
-      en: |-
-        Confirm that the same text as contained in the image is announced when using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor.
-- platform: mobile
+      Confirm the following with iOS VoiceOver enabled:
+
+      *  Cofirm that the same text as contained in the image is announced when reaching the image by one-finger left/right flicks.
+      *  Cofirm that the same text as contained in the image is announced when the image is touched, instead of reaching it by flicking.
+  note:
+    ja: |-
+      参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+    en: |-
+      CF: :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+- platform: android
+  type: simple
+  tool: android-tb
+  id: "0531-androidtb-01"
   procedure:
     ja: |-
-      以下のiOS VoiceOverおよびAndroid TalkBackによるチェックを満たしていることを確認する。
+      Android TalkBackが有効な状態で、以下を確認する：
+
+      *  1本指による右および左方向のフリックで画像に到達した際、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
+      *  （フリックではなく）画像に触れたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
     en: |-
-      Confirm that the following checks by iOS VoiceOver and Android TalkBack pass.
-  techniques:
-  - tool: ios-vo
-    technique:
-      ja: |-
-        *  1本指による右および左方向のフリックで画像に到達した際、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
-        *  （フリックではなく）画像に触れたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
-      en: |-
-        *  Cofirm that the same text as contained in the image is announced when reaching the image by one-finger left/right flicks.
-        *  Cofirm that the same text as contained in the image is announced when the image is touched, instead of reaching it by flicking.
-    note:
-      ja: |-
-        参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
-      en: |-
-        CF: :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
-  - tool: android-tb
-    technique:
-      ja: |-
-        *  1本指による右および左方向のフリックで画像に到達した際、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
-        *  （フリックではなく）画像に触れたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
-      en: |-
-        *  Cofirm that the same text as contained in the image is announced when reaching the image by one-finger left/right flicks.
-        *  Cofirm that the same text as contained in the image is announced when the image is touched, instead of reaching it by flicking.
-    note:
-      ja: |-
-        参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
-      en: |-
-        CF: :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+      Confirm the following with Android TalkBack enabled:
+
+      *  Cofirm that the same text as contained in the image is announced when reaching the image by one-finger left/right flicks.
+      *  Cofirm that the same text as contained in the image is announced when the image is touched, instead of reaching it by flicking.
+  note:
+    ja: |-
+      参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+    en: |-
+      CF: :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
